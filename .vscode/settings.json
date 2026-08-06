@@ -1,3 +1,0 @@
-{
-    "python.defaultInterpreterPath": "${workspaceFolder}\\django\\djvenv\\Scripts\\python.exe"
-}
