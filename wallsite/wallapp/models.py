@@ -12,11 +12,12 @@ class Wall(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, default=None, blank=True, null=True, verbose_name='Автор')
+    likes = models.ManyToManyField(get_user_model(), default=None, blank=True, verbose_name='Лайкнувшие пользователи', related_name='likes')
     
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("post", kwargs={"post_slug": self.slug})
+        return reverse("wallapp:post", kwargs={"post_slug": self.slug})
     
     
