@@ -8,6 +8,7 @@ class WallHome(DataMixin, ListView):
     template_name = 'wall/index.html'
     context_object_name = 'posts'
     title_page = 'Главная страница'
+    paginate_by = 2
     
     def get_queryset(self):
         return Wall.objects.all().select_related('author')
@@ -23,6 +24,7 @@ class AddPost(DataMixin, CreateView):
     #     if self.request.user:
     #         w.author = self.request.user
     #     return super().form_valid(form)
+
     
 class ShowPost(DataMixin, DetailView):
     model = Wall
