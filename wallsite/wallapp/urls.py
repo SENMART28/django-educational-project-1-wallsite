@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'wallapp'
+
 urlpatterns = [
     path('', views.WallHome.as_view(), name='home'),
     path('addpage/', views.AddPost.as_view(), name='add_page'),

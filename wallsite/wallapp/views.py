@@ -3,6 +3,7 @@ from django.views.generic import CreateView, DetailView, ListView
 from .models import Wall
 from .utils import DataMixin
 from .forms import AddPostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class WallHome(DataMixin, ListView):
     template_name = 'wall/index.html'
@@ -14,17 +15,16 @@ class WallHome(DataMixin, ListView):
         return Wall.objects.all().select_related('author')
     
 
-class AddPost(DataMixin, CreateView):
+class AddPost(DataMixin, LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     template_name = 'wall/add_page.html'
     title_page = 'Создать пост'
     
-    # def form_valid(self, form):
-    #     w = form.save(commit=False)
-    #     if self.request.user:
-    #         w.author = self.request.user
-    #     return super().form_valid(form)
-
+    def form_valid(self, form):
+        w = form.save(commit=False)
+        if self.request.user:
+            w.author = self.request.user
+        return super().form_valid(form)
     
 class ShowPost(DataMixin, DetailView):
     model = Wall
