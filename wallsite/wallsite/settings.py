@@ -123,3 +123,27 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'users.User'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', 
+    'users.authentication.EmailAuthBackend',
+]
+
+LOGIN_REDIRECT_URL = 'wallapp:home'
+LOGOUT_REDIRECT_URL = 'wallapp:home'
+LOGIN_URL = 'users:login'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = 'ttnmrtnk@gmail.com'
+EMAIL_HOST_PASSWORD = 'gacd tbln btug tsyx'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
