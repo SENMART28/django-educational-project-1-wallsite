@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView
 from .models import Wall
 from .utils import DataMixin
@@ -32,8 +32,23 @@ class ShowPost(DataMixin, DetailView):
     slug_url_kwarg = 'post_slug'
     slug_field = 'slug'
     context_object_name = 'post'
+    title_page = 'Смотреть пост'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['title_page'] = context['post'].title
         return context
+    
+
+def ToggleLike(request, post_slug):
+    if not request.user.is_authenticated:
+        return redirect('users:login')
+    
+    post = Wall.objects.get(slug=post_slug)
+    
+    if request.user not in post.likes.all():
+        post.likes.add(request.user)
+    else:
+        post.likes.remove(request.user)
+        
+    return redirect(request.META.get('HTTP_REFERER', 'wallapp:home'))
