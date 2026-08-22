@@ -16,6 +16,12 @@
             {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
                 <p>Изменено: {{p.time_update}}</p>
             {% endif %}
+            <p>Лайков: {{ p.likes.count }}</p>
+            {% if request.user in p.likes.all %}
+            <p><a href='{% url "wallapp:togglelikepost" p.slug %}'>Убрать оценку</a></p>
+            {% else %}
+            <p><a href='{% url "wallapp:togglelikepost" p.slug %}'>Нравится</a></p>
+            {% endif %}
             <p><a href='{{ p.get_absolute_url }}'>Смотреть пост</a></p>
         </div>
     </li>

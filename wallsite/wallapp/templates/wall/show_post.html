@@ -13,5 +13,11 @@
     {% if post.time_create != post.time_update%}
         <p>Изменено: {{post.time_update}}</p>
     {% endif %}
+    <p>Лайков: {{ post.likes.count }}</p>
+    {% if request.user in post.likes.all %}
+        <p><a href='{% url "wallapp:togglelikepost" post.slug %}'>Убрать оцену</a></p>
+    {% else %}
+        <p><a href='{% url "wallapp:togglelikepost" post.slug %}'>Нравится</a></p>
+    {% endif %}
 </div>
 {% endblock content %}
