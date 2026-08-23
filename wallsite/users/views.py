@@ -1,6 +1,6 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, user_logged_in
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from .forms import LoginUserForm, RegisterUserForm, UserPasswordChangeForm
 from .utils import DataMixin
@@ -26,13 +26,23 @@ class RegisterUser(CreateView, DataMixin):
 class ProfileUser(DetailView, DataMixin):
     model = get_user_model()
     template_name = 'users/profile.html'
-    title_page = 'Личный профиль'
-    
-    def get_object(self):
-        return self.request.user
+    title_page = 'Профиль пользователя'
+    pk_url_kwarg = 'user_id'
+    pk_field = 'id'
+    context_object_name = 'user'
     
     
 class UserPasswordChange(PasswordChangeView):
     form_class = UserPasswordChangeForm
     success_url = reverse_lazy('users:password_change_done')
     template_name = 'users/password_change_form.html'
+    
+    
+class UserPosts(ListView, DataMixin):
+    context_object_name = 'posts'
+    template_name = 'users/index.html'
+    title_page = 'Посты пользователя'
+    paginate_by = 2
+    
+    def get_queryset(self):
+        return get_user_model().objects.get(pk=self.kwargs.get('user_id')).posts.filter(private=False)

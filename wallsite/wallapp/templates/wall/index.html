@@ -9,8 +9,10 @@
             <h3>{{p.text|truncatechars:100}}</h3>
             {% if p.private%}
                 <p>Автор: неизвестен</p>
+            {% elif p.author.id %}
+                <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
             {% else %}
-                <p>Автор: {{ p.author.username|default:"неизвестен"}}</p>
+                <p>Автор: {{ p.author.username }}</p>
             {% endif %}
             <p>Дата публикации: {{p.time_create}}</p>
             {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
@@ -33,6 +35,9 @@
     {% if page_obj.has_other_pages %}
         <nav>
             <ul>
+                {% if page_obj.number > 3 %}
+                    <li><a href='?page=1'>&lt;&lt;</a></li>
+                {% endif %}
                 {% if page_obj.has_previous %}
                     <li><a href='?page={{ page_obj.previous_page_number }}'>&lt;</a></li>
                 {% endif %}
@@ -45,6 +50,9 @@
                 {% endfor %}
                 {% if page_obj.has_next %}
                     <li><a href='?page={{ page_obj.next_page_number }}'>&gt;</a></li>
+                {% endif %}
+                {% if page_obj.number < page_obj.paginator.num_pages|add:-3 %}
+                    <li><a href='?page={{ page_obj.paginator.num_pages }}'>&gt;&gt;</a></li>
                 {% endif %}
             </ul>
         </nav>
