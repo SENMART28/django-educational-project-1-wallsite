@@ -2,5 +2,8 @@
 
 {% block content %}
     <p>{{ user.username }}</p>
-    <a href='{% url "users:password_change" %}'>Изменить пароль</a>
+    <p>Смотреть <a href='{% url "users:user_posts" user.id %}'>посты</a></p>
+    {% if user == request.user %}
+        <a href='{% url "users:password_change" %}'>Изменить пароль</a>
+    {% endif %}
 {% endblock content %}
