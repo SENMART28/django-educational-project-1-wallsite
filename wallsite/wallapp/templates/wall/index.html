@@ -7,6 +7,9 @@
         <div>
             <h2>{{p.title}}</h2>
             <h3>{{p.text|truncatechars:100}}</h3>
+            {% if p.photo %}
+                <p><img src='{{ p.photo.url }}'></p>
+            {% endif %}
             {% if p.private%}
                 <p>Автор: неизвестен</p>
             {% elif p.author.id %}

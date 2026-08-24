@@ -4,6 +4,9 @@
 <div>
     <h2>{{post.title}}</h2>
     <h3>{{post.text}}</h3>
+    {% if p.photo %}
+        <p><img src='{{ p.photo.url }}'></p>
+    {% endif %}
     {% if post.private%}
         <p>Автор: неизвестен</p>
     {% else %}
