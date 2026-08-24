@@ -6,6 +6,6 @@ from django.core.exceptions import ValidationError
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Wall
-        fields = ['title', 'text', 'private']
+        fields = ['title', 'text', 'photo', 'private']
         widgets = {'text': forms.Textarea(attrs={'cols': 50, 'rows': 5})}
         

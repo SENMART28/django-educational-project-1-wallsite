@@ -2,8 +2,11 @@
 
 {% block content %}
     <p>{{ user.username }}</p>
+    {% if user.photo %}
+        <p><img src='{{ user.photo.url }}'></p>
+    {% endif %}
     <p>Смотреть <a href='{% url "users:user_posts" user.id %}'>посты</a></p>
     {% if user == request.user %}
-        <a href='{% url "users:password_change" %}'>Изменить пароль</a>
+        <p><a href='{% url "users:profile_change" %}'>Редактировать профиль</a></p>
     {% endif %}
 {% endblock content %}

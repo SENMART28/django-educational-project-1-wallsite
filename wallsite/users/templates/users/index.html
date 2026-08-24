@@ -8,6 +8,9 @@
                 <div>
                     <h2>{{p.title}}</h2>
                     <h3>{{p.text|truncatechars:100}}</h3>
+                    {% if p.photo %}
+                        <p><img src='{{ p.photo.url }}'></p>
+                    {% endif %}
                     {% if p.author.id %}
                         <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
                     {% else %}
