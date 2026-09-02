@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 """
 Django settings for wallsite project.
 
@@ -142,7 +145,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 EMAIL_HOST_USER = 'ttnmrtnk@gmail.com'
-EMAIL_HOST_PASSWORD = 'gacd tbln btug tsyx'
+load_dotenv()
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
