@@ -20,7 +20,7 @@
     {% if request.user.is_authenticated %}
         <form action='{% url "wallapp:togglelikepost" post.slug %}' method='post'>
             {% csrf_token %}
-            {% if request.user in post.likes.all %}
+            {% if is_liked %}
                 <button type='submit'>Убрать оценку</button>
             {% else %}
                 <button type='submit'>Нравится</button>
