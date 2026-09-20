@@ -2,6 +2,11 @@ __pycache__/
 *.pyc
 db.sqlite3
 .vscode/
-vnv/
+venv/
 djvenv/
 wallsite/.env
+staticfiles/
+*/staticfiles/
+media/
+*/media/
+.env/

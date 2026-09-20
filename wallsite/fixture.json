@@ -1,0 +1,615 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 3,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 3,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 3,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 3,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 2,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 2,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 2,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 2,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add wall",
+    "content_type": 6,
+    "codename": "add_wall"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change wall",
+    "content_type": 6,
+    "codename": "change_wall"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete wall",
+    "content_type": 6,
+    "codename": "delete_wall"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view wall",
+    "content_type": 6,
+    "codename": "view_wall"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 7,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 7,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 7,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 7,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 8,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 8,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 8,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 8,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "wallapp",
+    "model": "wall"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "users",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "1ny785ykysbzyxpspb2yad98yz2flryg",
+  "fields": {
+    "session_data": ".eJxVjLsOwjAMAP_FM4qc2ulrZOcbqsROaAElUtNOiH9HlTrAene6N0x-3-Zpr3GdFoURLFx-WfDyjPkQ-vD5XoyUvK1LMEdiTlvNrWh8Xc_2bzD7OsMIJL2odkGFlR1TJHZIaIVSG2VQtU2XWgzcd9yS5aQDJuew8Ui2CQ4-X-jAN14:1x8FnE:S_rKZiXG_84UcGS3pLwaS4WMwOwyro157RbsWcLwtq4",
+    "expire_date": "2026-10-04T11:33:12.067Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "20sgtrt9xiosyrdj6zfz9q9cl83p5ek1",
+  "fields": {
+    "session_data": ".eJxVjDkOwjAQAP-yNbJ8xCZOSZ83WLveDQ4gW8pRIf6OIqWAdmY0b0i4byXtqyxpZhjAwuWXEean1EPwA-u9qdzqtsykjkSddlVjY3ndzvZvUHAtMACxjp1DlGhc5Bwo-C5rZq_F6KtY4wP1OFHw2XXUs4tkPSE74Sn4wPD5AvKVOIg:1wxmaT:eIlEqp5W-IyhQwAb1WmlEG3nUBJfT4RzdWcFCuHFiLM",
+    "expire_date": "2026-09-05T14:20:45.249Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "thg1x5z2cn9w5tb2etpy8ti5dyi6elkp",
+  "fields": {
+    "session_data": ".eJxVjDEOwjAMAP_iGUUOTULckZ03RI7j0gJKpaadEH9HlTrAene6NyTe1jFtTZc0FejBIiLC6ZdnlqfWXZYH1_tsZK7rMmWzJ-awzdzmoq_r0f4NRm4j9NBFsoOXThz7EpHF2otzmTJyCcRI6L2ec1QuZDHE0EWKg2AWr0Mghc8XZ0Q4nQ:1wy6oU:GXJ9fG-F8DR__sU_NIX9UuD-uICTZoIbR_mC3XukTJM",
+    "expire_date": "2026-09-06T11:56:34.594Z"
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 1,
+  "fields": {
+    "title": "Hi",
+    "slug": "hi",
+    "text": "First post",
+    "photo": "",
+    "private": true,
+    "time_create": "2026-08-06T00:34:44.465Z",
+    "time_update": "2026-08-06T00:34:44.465Z",
+    "author": null,
+    "likes": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 2,
+  "fields": {
+    "title": "Hi",
+    "slug": "hi-2",
+    "text": "Second post",
+    "photo": "",
+    "private": false,
+    "time_create": "2026-08-06T00:34:54.851Z",
+    "time_update": "2026-08-06T00:34:54.851Z",
+    "author": null,
+    "likes": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 3,
+  "fields": {
+    "title": "Hi",
+    "slug": "hi-3",
+    "text": "Third post",
+    "photo": "",
+    "private": true,
+    "time_create": "2026-08-06T00:36:08.675Z",
+    "time_update": "2026-08-06T00:36:08.675Z",
+    "author": 1,
+    "likes": []
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 4,
+  "fields": {
+    "title": "Hi",
+    "slug": "hi-4",
+    "text": "4th post",
+    "photo": "",
+    "private": false,
+    "time_create": "2026-08-06T00:36:21.187Z",
+    "time_update": "2026-08-06T00:36:21.187Z",
+    "author": 1,
+    "likes": []
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 5,
+  "fields": {
+    "title": "5th post!",
+    "slug": "5th-post",
+    "text": "post just to test xD",
+    "photo": "",
+    "private": false,
+    "time_create": "2026-08-20T15:47:21.477Z",
+    "time_update": "2026-08-20T15:47:21.477Z",
+    "author": 1,
+    "likes": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 6,
+  "fields": {
+    "title": "Hi from 1234",
+    "slug": "hi-from-1234",
+    "text": "new user",
+    "photo": "",
+    "private": true,
+    "time_create": "2026-08-21T14:03:56.888Z",
+    "time_update": "2026-08-21T14:03:56.888Z",
+    "author": 2,
+    "likes": [
+      2
+    ]
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 7,
+  "fields": {
+    "title": "Anonim test post",
+    "slug": "anonim-test-post",
+    "text": "test",
+    "photo": "",
+    "private": true,
+    "time_create": "2026-08-21T14:15:46.122Z",
+    "time_update": "2026-08-21T14:15:46.122Z",
+    "author": 1,
+    "likes": []
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 8,
+  "fields": {
+    "title": "anonim test post 2",
+    "slug": "anonim-test-post-2",
+    "text": "test",
+    "photo": "",
+    "private": false,
+    "time_create": "2026-08-21T14:15:58.893Z",
+    "time_update": "2026-08-21T14:15:58.893Z",
+    "author": 1,
+    "likes": []
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 9,
+  "fields": {
+    "title": "Test Owner Post",
+    "slug": "test-owner-post",
+    "text": "test",
+    "photo": "",
+    "private": false,
+    "time_create": "2026-08-23T11:56:45.793Z",
+    "time_update": "2026-08-23T11:56:45.793Z",
+    "author": 10000,
+    "likes": []
+  }
+},
+{
+  "model": "wallapp.wall",
+  "pk": 10,
+  "fields": {
+    "title": "1st photo test",
+    "slug": "1st-photo-test",
+    "text": "Test",
+    "photo": "photos/2026/08/24/Без_названия.jpg",
+    "private": false,
+    "time_create": "2026-08-24T11:47:02.439Z",
+    "time_update": "2026-08-24T11:47:02.439Z",
+    "author": 10000,
+    "likes": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$RZeOeY7Fm0k348K0I4lBZs$j4gG6fGUSSa3ZBZlkwKFZ7KIVbDJ2attoCHqR9g/tPA=",
+    "last_login": "2026-09-20T11:33:12.061Z",
+    "is_superuser": false,
+    "username": "SENMART",
+    "first_name": "milion",
+    "last_name": "pas",
+    "email": "ttnmrtnk@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-06T00:32:58.530Z",
+    "photo": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$ShE1wvsDTmfF0GY2J9qfNA$vfHMD20c4DE7uHxTJodULOJgkef9Cs2RhwEGbvl3liw=",
+    "last_login": "2026-08-22T14:20:45.244Z",
+    "is_superuser": false,
+    "username": "1234",
+    "first_name": "milion",
+    "last_name": "pas",
+    "email": "d63251100@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-21T13:46:26.847Z",
+    "photo": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 9999,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "system_admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@test.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-23T11:47:32.043Z",
+    "photo": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 10000,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$qmDG6GDxTLP1a7iTthTpRh$h11ZggszP7Na3x53zfHELZA/WuZCn8uO9ZRJy8K1hXo=",
+    "last_login": "2026-08-23T11:56:34.588Z",
+    "is_superuser": false,
+    "username": "ttnmrtnk",
+    "first_name": "milion",
+    "last_name": "pass",
+    "email": "example@examp.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-08-23T11:56:24.370Z",
+    "photo": "users/2026/08/24/Без_названия_QxEPaK9.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
