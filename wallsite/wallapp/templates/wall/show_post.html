@@ -17,10 +17,17 @@
         <p>Изменено: {{post.time_update}}</p>
     {% endif %}
     <p>Лайков: {{ post.likes.count }}</p>
-    {% if request.user in post.likes.all %}
-        <p><a href='{% url "wallapp:togglelikepost" post.slug %}'>Убрать оцену</a></p>
+    {% if request.user.is_authenticated %}
+        <form action='{% url "wallapp:togglelikepost" post.slug %}' method='post'>
+            {% csrf_token %}
+            {% if request.user in post.likes.all %}
+                <button type='submit'>Убрать оценку</button>
+            {% else %}
+                <button type='submit'>Нравится</button>
+            {% endif %}
+        </form>
     {% else %}
-        <p><a href='{% url "wallapp:togglelikepost" post.slug %}'>Нравится</a></p>
+        <p><a href={% url "users:login" %}>Войдите</a>, чтобы ставить лайки</p>
     {% endif %}
 </div>
 {% endblock content %}
