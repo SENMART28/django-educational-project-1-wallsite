@@ -1,4 +1,8 @@
+from webbrowser import get
+
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView
 from .models import Wall
 from .utils import DataMixin
@@ -40,11 +44,10 @@ class ShowPost(DataMixin, DetailView):
         return context
     
 
+@login_required
+@require_POST
 def ToggleLike(request, post_slug):
-    if not request.user.is_authenticated:
-        return redirect('users:login')
-    
-    post = Wall.objects.get(slug=post_slug)
+    post = get_object_or_404(Wall, slug=post_slug)
     
     if request.user not in post.likes.all():
         post.likes.add(request.user)
