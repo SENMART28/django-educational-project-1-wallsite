@@ -16,7 +16,7 @@ class WallHome(DataMixin, ListView):
     paginate_by = 2
     
     def get_queryset(self):
-        return Wall.objects.all().select_related('author')
+        return Wall.objects.all().select_related('author').prefetch_related('likes')
     
 
 class AddPost(DataMixin, LoginRequiredMixin, CreateView):
@@ -38,9 +38,18 @@ class ShowPost(DataMixin, DetailView):
     context_object_name = 'post'
     title_page = 'Смотреть пост'
     
+    def get_queryset(self):
+        return Wall.objects.select_related('author')
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['title_page'] = context['post'].title
+        
+        is_liked = False
+        if self.request.user.is_authenticated:
+            is_liked = self.object.likes.filter(pk=self.request.user.pk).exists()
+        context['is_liked'] = is_liked
+        
         return context
     
 
