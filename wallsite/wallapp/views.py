@@ -13,7 +13,7 @@ class WallHome(TitleMixin, ListView):
     template_name = 'wall/index.html'
     context_object_name = 'posts'
     title_page = 'Главная страница'
-    paginate_by = 2
+    paginate_by = 5
     
     def get_queryset(self):
         return Wall.objects.all().select_related('author').prefetch_related('likes')
