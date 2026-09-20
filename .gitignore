@@ -4,8 +4,8 @@ db.sqlite3
 .vscode/
 venv/
 djvenv/
-staticfiles/
+wallsite/staticfiles/
 */staticfiles/
-media/
+wallsite/media/
 */media/
 .env
