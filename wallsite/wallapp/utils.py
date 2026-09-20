@@ -1,4 +1,4 @@
-class DataMixin:
+class TitleMixin:
     title_page = None
     
     def get_context_data(self):
