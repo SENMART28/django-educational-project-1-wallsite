@@ -7,7 +7,7 @@ from .utils import TitleMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class LoginUser(LoginView, TitleMixin):
+class LoginUser(TitleMixin, LoginView):
     form_class = LoginUserForm
     template_name = 'users/login.html'
     title_page = 'Авторизация'
@@ -17,14 +17,14 @@ class LoginUser(LoginView, TitleMixin):
         return reverse_lazy('wallapp:home')
     
 
-class RegisterUser(CreateView, TitleMixin):
+class RegisterUser(TitleMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
     title_page = 'Регистрация'
 
 
-class ProfileUser(DetailView, LoginRequiredMixin, TitleMixin):
+class ProfileUser(TitleMixin, DetailView, LoginRequiredMixin):
     model = get_user_model()
     template_name = 'users/profile.html'
     title_page = 'Профиль пользователя'
@@ -39,7 +39,7 @@ class UserPasswordChange(PasswordChangeView, LoginRequiredMixin):
     template_name = 'users/password_change_form.html'
     
     
-class UserPosts(ListView, TitleMixin):
+class UserPosts(TitleMixin, ListView):
     context_object_name = 'posts'
     template_name = 'users/index.html'
     title_page = 'Посты пользователя'
@@ -49,7 +49,7 @@ class UserPosts(ListView, TitleMixin):
         return get_user_model().objects.get(pk=self.kwargs.get('user_id')).posts.filter(private=False)
     
 
-class ChangeProfile(UpdateView, LoginRequiredMixin, TitleMixin):
+class ChangeProfile(TitleMixin, UpdateView, LoginRequiredMixin):
     model = get_user_model()
     fields = ['username', 'first_name', 'last_name', 'photo']
     template_name = 'users/profile_change.html'
