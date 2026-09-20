@@ -5,11 +5,11 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView
 from .models import Wall
-from .utils import DataMixin
+from .utils import TitleMixin
 from .forms import AddPostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-class WallHome(DataMixin, ListView):
+class WallHome(TitleMixin, ListView):
     template_name = 'wall/index.html'
     context_object_name = 'posts'
     title_page = 'Главная страница'
@@ -19,7 +19,7 @@ class WallHome(DataMixin, ListView):
         return Wall.objects.all().select_related('author').prefetch_related('likes')
     
 
-class AddPost(DataMixin, LoginRequiredMixin, CreateView):
+class AddPost(TitleMixin, LoginRequiredMixin, CreateView):
     form_class = AddPostForm
     template_name = 'wall/add_page.html'
     title_page = 'Создать пост'
@@ -30,7 +30,7 @@ class AddPost(DataMixin, LoginRequiredMixin, CreateView):
             w.author = self.request.user
         return super().form_valid(form)
     
-class ShowPost(DataMixin, DetailView):
+class ShowPost(TitleMixin, DetailView):
     model = Wall
     template_name = 'wall/show_post.html'
     slug_url_kwarg = 'post_slug'
