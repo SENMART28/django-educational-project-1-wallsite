@@ -1,10 +1,27 @@
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    restart: always
+    networks:
+      - dbnet
+    expose:
+      - 8088
+    ports:
+      - "80:8088"
+    volumes:
+      - ./wallsite/staticfiles:/app/www/wallsite/static
+      - ./wallsite/media:/app/www/wallsite/media
+      - ./wallsite/logs:/app/www/wallsite/logs
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - wallsite
   wallsite:
     build: ./wallsite
     image: wallsite
     container_name: wallsite
     restart: always
-    command: 'python manage.py runserver 0.0.0.0:8000'
+    command: 'gunicorn -c gunicorn.py wallsite.wsgi'
     env_file:
       - .env
     links:
