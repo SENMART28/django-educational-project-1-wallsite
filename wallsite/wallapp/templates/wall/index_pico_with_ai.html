@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 style="margin-bottom: 24px;">Лента записей</h2>
+
+    {% for p in posts %}
+        <article>
+            <header>
+                <h3 style="margin-bottom: 4px;">{{ p.title }}</h3>
+                <p style="margin-bottom: 0;">
+                    <small>
+                        {% if p.private %}
+                            Автор: <em>Аноним</em>
+                        {% elif p.author %}
+                            Автор: <a href="{% url 'users:profile' p.author.id %}">{{ p.author.username }}</a>
+                        {% else %}
+                            Автор: Неизвестен
+                        {% endif %}
+                        • {{ p.time_create|date:"d.m.Y H:i" }}
+                    </small>
+                </p>
+            </header>
+
+            <p>{{ p.text }}</p>
+
+            {% if p.photo %}
+                <p><img src="{{ p.photo.url }}" alt="{{ p.title }}" style="max-height: 350px; border-radius: 6px;"></p>
+            {% endif %}
+
+            <footer>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <div>
+                        <span>Лайков: <strong>{{ p.likes.count }}</strong></span>
+                        • <a href="{{ p.get_absolute_url }}"><small>Открыть пост</small></a>
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+                        <form action="{% url 'wallapp:togglelikepost' p.slug %}" method="post" style="margin: 0;">
+                            {% csrf_token %}
+                            {% if request.user in p.likes.all %}
+                                <button type="submit" class="secondary outline" style="width: auto; margin: 0; padding: 6px 14px;">
+                                    Убрать оценку
+                                </button>
+                            {% else %}
+                                <button type="submit" style="width: auto; margin: 0; padding: 6px 14px;">
+                                    Нравится
+                                </button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                </div>
+            </footer>
+        </article>
+    {% empty %}
+        <p>Постов пока нет.</p>
+    {% endfor %}
+{% endblock content %}
+
+{% block navigation %}
+    {% if page_obj.has_other_pages %}
+        <nav style="display: flex; justify-content: center; margin-top: 20px;">
+            <ul style="display: flex; list-style: none; gap: 8px; padding: 0;">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&larr; Назад</a></li>
+                {% endif %}
+
+                {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                        <li><strong>[{{ p }}]</strong></li>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                        <li><a href="?page={{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">Вперед &rarr;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock navigation %}

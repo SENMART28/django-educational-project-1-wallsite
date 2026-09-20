@@ -1,13 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title_page }}</title>
+    <link rel="stylesheet" href="{% static 'css/pico.min.css' %}">
 </head>
 <body>
-
-    <header>
+    <header class="container">
         <nav>
             <a href="{% url 'wallapp:home' %}">Главная</a> | 
             <a href="{% url 'wallapp:add_page' %}">Создать пост</a> | 
@@ -24,15 +25,15 @@
         </nav>
     </header>
 
-    <main>
+    <main class="container" style="max-width: 800px;">
         {% block content %}
         {% endblock %}
+
+        {% block navigation %}
+        {% endblock navigation %}
     </main>
 
-    {% block navigation %}
-    {% endblock navigation %}
-
-    <footer>
+    <footer class="container" style="max-width: 800px; text-align: center; margin-top: 40px;">
         <p>&copy; 2026 Моя Стенка</p>
     </footer>
 
