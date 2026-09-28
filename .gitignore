@@ -6,6 +6,8 @@ venv/
 djvenv/
 wallsite/staticfiles/
 */staticfiles/
+wallsite/static/admin/
+*/static/admin/
 wallsite/media/
 */media/
 *.log
