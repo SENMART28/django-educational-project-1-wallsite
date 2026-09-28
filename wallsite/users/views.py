@@ -24,7 +24,7 @@ class RegisterUser(TitleMixin, CreateView):
     title_page = 'Регистрация'
 
 
-class ProfileUser(TitleMixin, DetailView, LoginRequiredMixin):
+class ProfileUser(LoginRequiredMixin, TitleMixin, DetailView):
     model = get_user_model()
     template_name = 'users/profile.html'
     title_page = 'Профиль пользователя'
@@ -33,7 +33,7 @@ class ProfileUser(TitleMixin, DetailView, LoginRequiredMixin):
     context_object_name = 'user'
     
     
-class UserPasswordChange(PasswordChangeView, LoginRequiredMixin):
+class UserPasswordChange(LoginRequiredMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     success_url = reverse_lazy('users:password_change_done')
     template_name = 'users/password_change_form.html'
@@ -49,7 +49,7 @@ class UserPosts(TitleMixin, ListView):
         return get_user_model().objects.get(pk=self.kwargs.get('user_id')).posts.filter(private=False)
     
 
-class ChangeProfile(TitleMixin, UpdateView, LoginRequiredMixin):
+class ChangeProfile(LoginRequiredMixin, TitleMixin, UpdateView):
     model = get_user_model()
     fields = ['username', 'first_name', 'last_name', 'photo']
     template_name = 'users/profile_change.html'

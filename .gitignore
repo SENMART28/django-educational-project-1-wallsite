@@ -8,4 +8,5 @@ wallsite/staticfiles/
 */staticfiles/
 wallsite/media/
 */media/
+*.log
 .env

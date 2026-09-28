@@ -1,6 +1,4 @@
-from webbrowser import get
-
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView
@@ -19,15 +17,13 @@ class WallHome(TitleMixin, ListView):
         return Wall.objects.all().select_related('author').prefetch_related('likes')
     
 
-class AddPost(TitleMixin, LoginRequiredMixin, CreateView):
+class AddPost(LoginRequiredMixin, TitleMixin, CreateView):
     form_class = AddPostForm
     template_name = 'wall/add_page.html'
     title_page = 'Создать пост'
     
     def form_valid(self, form):
-        w = form.save(commit=False)
-        if self.request.user:
-            w.author = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
     
 class ShowPost(TitleMixin, DetailView):
@@ -63,4 +59,4 @@ def ToggleLike(request, post_slug):
     else:
         post.likes.remove(request.user)
         
-    return redirect(request.META.get('HTTP_REFERER', 'wallapp:home'))
+    return redirect(request.META.get('HTTP_REFERER', reverse('wallapp:home')))
