@@ -41,7 +41,7 @@
                 {% else %}
                     <p>Автор: {{ comment.author.username|default:"неизвестен"}}</p>
                 {% endif %}
-                <h3>{{ comment.text }}</h3>
+                <h4>{{ comment.text }}</h4>
                 <h5>Последние изменения: {{ comment.time_update }}</h5>
             {% endfor %}
             <p><a href='{{ p.get_absolute_url }}'>Смотреть пост и комментарии: {{ p.comments.all|length }}</a></p>

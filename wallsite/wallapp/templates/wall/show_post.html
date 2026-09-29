@@ -36,9 +36,11 @@
         {% else %}
             <p>Автор: {{ comment.author.username|default:"неизвестен"}}</p>
         {% endif %}
-        <h3>{{ comment.text }}</h3>
+        <h4>{{ comment.text }}</h4>
         <h5>Последние изменения: {{ comment.time_update }}</h5>
     {% endfor %}
+    {% if request.user.is_authenticated %}
+    <h3>Прокомментируйте пост:</h3>
     <form method="post">
         {% csrf_token %}
         <div>{{ form.non_field_errors }}</div>
@@ -48,5 +50,8 @@
         {% endfor %}
         <p><button type='submit'>Опубликовать</button></p>
     </form>
+    {% else %}
+    <p><a href={% url "users:login" %}>Зарегестрируйтесь</a> чтобы оставлять комментарии!</p>
+    {% endif %}
 </div>
 {% endblock content %}

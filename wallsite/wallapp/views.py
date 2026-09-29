@@ -40,7 +40,8 @@ class ShowPost(TitleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['title_page'] = context['post'].title
-        context['form'] = AddCommentForm()
+        if 'form' not in context:    
+            context['form'] = AddCommentForm()
         
         is_liked = False
         if self.request.user.is_authenticated:
