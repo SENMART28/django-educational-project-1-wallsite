@@ -29,5 +29,24 @@
     {% else %}
         <p><a href={% url "users:login" %}>Войдите</a>, чтобы ставить лайки</p>
     {% endif %}
+    <h3>Комментарии:</h3>
+    {% for comment in post.comments.all %}
+        {% if comment.private%}
+            <p>Автор: неизвестен</p>
+        {% else %}
+            <p>Автор: {{ post.author.username|default:"неизвестен"}}</p>
+        {% endif %}
+        <h3>{{ comment.text }}</h3>
+        <h5>Последние изменения: {{ comment.time_update }}</h5>
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        <div>{{ form.non_field_errors }}</div>
+        {% for f in form %}
+        <p><label for='{{ f.id_for_label }}'>{{ f.label }}</label>{{ f }}</p>
+        <div>{{ f.errors }}</div>
+        {% endfor %}
+        <p><button type='submit'>Опубликовать</button></p>
+    </form>
 </div>
 {% endblock content %}

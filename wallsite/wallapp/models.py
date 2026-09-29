@@ -12,7 +12,7 @@ class Wall(models.Model):
     private = models.BooleanField(verbose_name='Опубликовать анонимно')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, default=None, blank=True, null=True, verbose_name='Автор', related_name='posts')
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=None, blank=True, null=True, verbose_name='Автор', related_name='posts')
     likes = models.ManyToManyField(get_user_model(), blank=True, verbose_name='Лайкнувшие пользователи')
     
     def __str__(self):
@@ -21,4 +21,14 @@ class Wall(models.Model):
     def get_absolute_url(self):
         return reverse("wallapp:post", kwargs={"post_slug": self.slug})
     
+class Comment(models.Model):
+    text = models.TextField(max_length=500, verbose_name='Содержание')
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comments', verbose_name='Автор')
+    post = models.ForeignKey(Wall, on_delete=models.CASCADE, related_name='comments', verbose_name='Прокомментированный пост')
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    time_update = models.DateTimeField(auto_now=True, verbose_name='Время последнего обновления')
+    private = models.BooleanField(verbose_name='Опубликовать анонимно')
+    
+    def __str__(self):
+        return f'Комментарий от {self.author}'
     

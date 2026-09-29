@@ -34,8 +34,17 @@
             {% else %}
                 <p><a href={% url "users:login" %}>Войдите</a>, чтобы ставить лайки</p>
             {% endif %}
-
-            <p><a href='{{ p.get_absolute_url }}'>Смотреть пост</a></p>
+            <h3>Комментарии:</h3>
+            {% for comment in p.comments.all|slice:"2" %}
+                {% if comment.private%}
+                    <p>Автор: неизвестен</p>
+                {% else %}
+                    <p>Автор: {{ post.author.username|default:"неизвестен"}}</p>
+                {% endif %}
+                <h3>{{ comment.text }}</h3>
+                <h5>Последние изменения: {{ comment.time_update }}</h5>
+            {% endfor %}
+            <p><a href='{{ p.get_absolute_url }}'>Смотреть пост и комментарии: {{ p.comments.all|length }}</a></p>
         </div>
     </li>
     {% endfor %}
