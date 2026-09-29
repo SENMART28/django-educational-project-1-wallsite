@@ -39,7 +39,7 @@
                 {% if comment.private%}
                     <p>Автор: неизвестен</p>
                 {% else %}
-                    <p>Автор: {{ post.author.username|default:"неизвестен"}}</p>
+                    <p>Автор: {{ comment.author.username|default:"неизвестен"}}</p>
                 {% endif %}
                 <h3>{{ comment.text }}</h3>
                 <h5>Последние изменения: {{ comment.time_update }}</h5>
