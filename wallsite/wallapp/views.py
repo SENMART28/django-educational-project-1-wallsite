@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404, redirect, reverse
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, ListView
-from .models import Wall
+from .models import Wall, Comment
 from .utils import TitleMixin
 from .forms import AddCommentForm, AddPostForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic import DeleteView
 
 class WallHome(TitleMixin, ListView):
     template_name = 'wall/index.html'
@@ -79,3 +82,41 @@ def ToggleLike(request, post_slug):
         post.likes.remove(request.user)
         
     return redirect(request.META.get('HTTP_REFERER', reverse('wallapp:home')))
+
+
+class DeletePost(PermissionRequiredMixin, DeleteView):
+    model = Wall
+    permission_required = 'wallapp.delete_wall'
+    slug_url_kwarg = 'post_slug'
+    slug_field = 'slug'
+    success_url = reverse_lazy('wallapp:home')
+    
+    
+class OwnerDeletePost(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Wall
+    slug_url_kwarg = 'post_slug'
+    slug_field = 'slug'
+    success_url = reverse_lazy('wallapp:home')
+    raise_exception = True
+
+    def test_func(self):
+        return self.get_object().author == self.request.user
+    
+
+class DeleteComment(PermissionRequiredMixin, DeleteView):
+    model = Comment
+    permission_required = 'wallapp.delete_comment'
+    pk_url_kwarg = 'comment_pk'
+    pk_field = 'pk'
+    success_url = reverse_lazy('wallapp:home')
+    
+    
+class OwnerDeleteComment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    pk_url_kwarg = 'comment_pk'
+    pk_field = 'pk'
+    success_url = reverse_lazy('wallapp:home')
+    raise_exception = True
+
+    def test_func(self):
+        return self.get_object().author == self.request.user

@@ -5,7 +5,14 @@
     {% if user.photo %}
         <p><img src='{{ user.photo.url }}'></p>
     {% endif %}
-    <p>Смотреть <a href='{% url "users:user_posts" user.id %}'>посты</a></p>
+    {% if user_can_delete_wall %}
+        <p>Данный пользователь является модератором постов</p>
+    {% endif %}
+    {% if user_can_delete_comment %}
+        <p>Данный пользователь является модератором комментариев</p>
+    {% endif %}
+    <p>Смотреть <a href='{% url "users:user_posts" user.id %}'>посты</a> пользователя</p>
+    <p>Смотреть <a href='{% url "users:user_comments" user.id %}'>комментарии</a> пользователя</p>
     {% if user == request.user %}
         <p><a href='{% url "users:profile_change" %}'>Редактировать профиль</a></p>
     {% endif %}

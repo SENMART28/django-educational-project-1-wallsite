@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    {% for p in comments %}
+        {% if not p.private %}
+            <li>
+                <div>
+                    <h3>{{p.text}}</h3>
+                    <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
+                    <p>Дата публикации: {{p.time_create}}</p>
+                    {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
+                        <p>Изменено: {{p.time_update}}</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% elif user_can_delete_comment %}
+            <li>
+                <div>
+                    <h2>Приватный комментарий!</h2>
+                    <h3>{{p.text}}</h3>
+                    <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
+                    <p>Дата публикации: {{p.time_create}}</p>
+                    {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
+                        <p>Изменено: {{p.time_update}}</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock content %}
+
+{% block navigation %}
+    {% if page_obj.has_other_pages %}
+        <nav>
+            <ul>
+                {% if page_obj.number > 3 %}
+                    <li><a href='?page=1'>&lt;&lt;</a></li>
+                {% endif %}
+                {% if page_obj.has_previous %}
+                    <li><a href='?page={{ page_obj.previous_page_number }}'>&lt;</a></li>
+                {% endif %}
+                {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                        <li>{{p}}</li>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                        <li><a href='?page={{ p }}'>{{ p }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href='?page={{ page_obj.next_page_number }}'>&gt;</a></li>
+                {% endif %}
+                {% if page_obj.number < page_obj.paginator.num_pages|add:-3 %}
+                    <li><a href='?page={{ page_obj.paginator.num_pages }}'>&gt;&gt;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock navigation %}

@@ -9,12 +9,26 @@
     {% endif %}
     {% if post.private%}
         <p>Автор: неизвестен</p>
+            {% if perms.wallapp.delete_wall %}
+                <p>Скрытый автор: <a href='{% url "users:profile" post.author.id %}'>{{ post.author.username }}</a></p>
+            {% endif %}
     {% else %}
-        <p>Автор: {{ post.author.username|default:"неизвестен"}}</p>
+        <p>Автор: <a href='{% url "users:profile" post.author.id %}'>{{ post.author.username }}</a></p>
     {% endif %}
     <p>Дата публикации: {{post.time_create}}</p>
     {% if post.time_create != post.time_update%}
         <p>Изменено: {{post.time_update}}</p>
+    {% endif %}
+    {% if perms.wallapp.delete_wall %}
+        <form method="post" action="{% url 'wallapp:delete_post' post.slug %}">
+            {% csrf_token %}
+            <p><button type="submit">Удалить пост</button></p>
+        </form>
+    {% elif request.user == post.author %}
+        <form method="post" action="{% url 'wallapp:owner_delete_post' post.slug %}">
+            {% csrf_token %}
+            <p><button type="submit">Удалить свой пост</button></p>
+        </form>
     {% endif %}
     <p>Лайков: {{ post.likes.count }}</p>
     {% if request.user.is_authenticated %}
@@ -33,11 +47,25 @@
     {% for comment in post.comments.all %}
         {% if comment.private%}
             <p>Автор: неизвестен</p>
+            {% if perms.wallapp.delete_comment %}
+                <p>Скрытый автор: <a href='{% url "users:profile" comment.author.id %}'>{{ comment.author.username }}</a></p>
+            {% endif %}
         {% else %}
-            <p>Автор: {{ comment.author.username|default:"неизвестен"}}</p>
+            <p>Автор: <a href='{% url "users:profile" post.author.id %}'>{{ post.author.username }}</a></p>
         {% endif %}
         <h4>{{ comment.text }}</h4>
         <h5>Последние изменения: {{ comment.time_update }}</h5>
+        {% if perms.wallapp.delete_comment %}
+            <form method="post" action="{% url 'wallapp:delete_comment' comment.pk %}">
+                {% csrf_token %}
+                <p><button type="submit">Удалить комментарий</button></p>
+            </form>
+        {% elif request.user == comment.author %}
+            <form method="post" action="{% url 'wallapp:owner_delete_comment' comment.pk %}">
+                {% csrf_token %}
+                <p><button type="submit">Удалить свой комментарий</button></p>
+            </form>
+        {% endif %}
     {% endfor %}
     {% if request.user.is_authenticated %}
     <h3>Прокомментируйте пост:</h3>

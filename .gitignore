@@ -11,4 +11,6 @@ wallsite/static/admin/
 wallsite/media/
 */media/
 *.log
+wallsite/logs/
+logs/
 .env

@@ -12,6 +12,9 @@
             {% endif %}
             {% if p.private%}
                 <p>Автор: неизвестен</p>
+                {% if perms.wallapp.delete_wall %}
+                    <p>Скрытый автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
+                {% endif %}
             {% elif p.author.id %}
                 <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
             {% else %}
@@ -20,6 +23,17 @@
             <p>Дата публикации: {{p.time_create}}</p>
             {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
                 <p>Изменено: {{p.time_update}}</p>
+            {% endif %}
+            {% if perms.wallapp.delete_wall %}
+                <form method="post" action="{% url 'wallapp:delete_post' p.slug %}">
+                    {% csrf_token %}
+                    <p><button type="submit">Удалить пост</button></p>
+                </form>
+            {% elif request.user == p.author %}
+                <form method="post" action="{% url 'wallapp:owner_delete_post' p.slug %}">
+                    {% csrf_token %}
+                    <p><button type="submit">Удалить свой пост</button></p>
+                </form>
             {% endif %}
             <p>Лайков: {{ p.likes.all|length }}</p> 
             {% if request.user.is_authenticated %}
@@ -38,13 +52,27 @@
             {% for comment in p.comments.all|slice:"2" %}
                 {% if comment.private%}
                     <p>Автор: неизвестен</p>
+                    {% if perms.wallapp.delete_comment %}
+                        <p>Скрытый автор: <a href='{% url "users:profile" comment.author.id %}'>{{ comment.author.username }}</a></p>
+                    {% endif %}
                 {% else %}
-                    <p>Автор: {{ comment.author.username|default:"неизвестен"}}</p>
+                    <p>Автор: <a href='{% url "users:profile" comment.author.id %}'>{{ comment.author.username }}</a></p>
                 {% endif %}
                 <h4>{{ comment.text }}</h4>
                 <h5>Последние изменения: {{ comment.time_update }}</h5>
+                {% if perms.wallapp.delete_comment %}
+                    <form method="post" action="{% url 'wallapp:delete_comment' comment.pk %}">
+                        {% csrf_token %}
+                        <p><button type="submit">Удалить комментарий</button></p>
+                    </form>
+                {% elif request.user == comment.author %}
+                    <form method="post" action="{% url 'wallapp:owner_delete_comment' comment.pk %}">
+                        {% csrf_token %}
+                        <p><button type="submit">Удалить свой комментарий</button></p>
+                    </form>
+                {% endif %}
             {% endfor %}
-            <p><a href='{{ p.get_absolute_url }}'>Смотреть пост и комментарии: {{ p.comments.all|length }}</a></p>
+            <p><a href='{{ p.get_absolute_url }}'>Еще...</a></p>
         </div>
     </li>
     {% endfor %}

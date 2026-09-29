@@ -11,11 +11,30 @@
                     {% if p.photo %}
                         <p><img src='{{ p.photo.url }}'></p>
                     {% endif %}
-                    {% if p.author.id %}
-                        <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
-                    {% else %}
-                        <p>Автор: {{ p.author.username }}</p>
+                    <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
+                    <p>Дата публикации: {{p.time_create}}</p>
+                    {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
+                        <p>Изменено: {{p.time_update}}</p>
                     {% endif %}
+                    <p>Лайков: {{ p.likes.count }}</p>
+                    {% if request.user in p.likes.all %}
+                    <p><a href='{% url "wallapp:togglelikepost" p.slug %}'>Убрать оценку</a></p>
+                    {% else %}
+                    <p><a href='{% url "wallapp:togglelikepost" p.slug %}'>Нравится</a></p>
+                    {% endif %}
+                    <p><a href='{{ p.get_absolute_url }}'>Смотреть пост</a></p>
+                </div>
+            </li>
+        {% elif user_can_delete_wall %}
+            <li>
+                <div>
+                    <h1>Приватный пост!</h1>
+                    <h2>{{p.title}}</h2>
+                    <h3>{{p.text|truncatechars:100}}</h3>
+                    {% if p.photo %}
+                        <p><img src='{{ p.photo.url }}'></p>
+                    {% endif %}
+                    <p>Автор: <a href='{% url "users:profile" p.author.id %}'>{{ p.author.username }}</a></p>
                     <p>Дата публикации: {{p.time_create}}</p>
                     {% if p.time_create|date:"Y-m-d H:i" != p.time_update|date:"Y-m-d H:i" %}
                         <p>Изменено: {{p.time_update}}</p>
