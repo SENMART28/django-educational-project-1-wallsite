@@ -83,7 +83,9 @@ class ChangeProfile(LoginRequiredMixin, TitleMixin, UpdateView):
     fields = ['username', 'first_name', 'last_name', 'photo']
     template_name = 'users/profile_change.html'
     title_page = 'Редактировать профиль'
-    success_url = reverse_lazy('wallapp:home')
     
     def get_object(self, queryset=None):
         return self.request.user
+    
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER') or reverse('wallapp:home')

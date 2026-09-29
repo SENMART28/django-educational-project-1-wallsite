@@ -89,18 +89,22 @@ class DeletePost(PermissionRequiredMixin, DeleteView):
     permission_required = 'wallapp.delete_wall'
     slug_url_kwarg = 'post_slug'
     slug_field = 'slug'
-    success_url = reverse_lazy('wallapp:home')
+    
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER') or reverse('wallapp:home')
     
     
 class OwnerDeletePost(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Wall
     slug_url_kwarg = 'post_slug'
     slug_field = 'slug'
-    success_url = reverse_lazy('wallapp:home')
     raise_exception = True
 
     def test_func(self):
         return self.get_object().author == self.request.user
+    
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER') or reverse('wallapp:home')
     
 
 class DeleteComment(PermissionRequiredMixin, DeleteView):
@@ -108,7 +112,9 @@ class DeleteComment(PermissionRequiredMixin, DeleteView):
     permission_required = 'wallapp.delete_comment'
     pk_url_kwarg = 'comment_pk'
     pk_field = 'pk'
-    success_url = reverse_lazy('wallapp:home')
+    
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER') or reverse('wallapp:home')
     
     
 class OwnerDeleteComment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -120,3 +126,6 @@ class OwnerDeleteComment(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.get_object().author == self.request.user
+    
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER') or reverse('wallapp:home')
